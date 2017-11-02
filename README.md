@@ -283,4 +283,281 @@ Lets create seed file for rating table
 ```
 knex seed:make 01-rating
 ```
-By executing this command in terminal it will create a seed file 
+By executing this command in terminal it will create a seed file that will contain code to delete all the existing data and then inserting some data into the database. 
+
+We will change the file to 
+
+```
+exports.seed = function(knex, Promise) {
+  const tblName = "rating";
+  const rows = [
+    { name: "PG" }, //1
+    { name: "G" }, //2
+    { name: "PG-13" }, //3
+    { name: "R" } //4
+  ];
+
+  return knex(tblName)
+    .del() //delete existing data
+    .then(function() {
+      return knex.insert(rows).into(tblName); //Insert new rows
+    });
+};
+```
+
+We begin by creating a variable that will hold the name of the table we are seeding data into, then the data itself into the rows variable, then we are asking knex to delete the existing data and then populating it with new data. 
+
+Now this process will be repeated to seed data into other 5 tables
+
+Lets copy and paste code quickly to see the result 
+
+**TAG** 
+
+```
+exports.seed = function(knex, Promise) 
+{
+  var tblName = 'tag';
+  var rows =
+  [
+      {name: '3D'},             //1
+      {name: 'Action'},         //2
+      {name: 'Animation'},      //3
+      {name: 'Comedy'},         //4
+      {name: 'Crime'},          //5
+      {name: 'Disaster'},       //6
+      {name: 'Drama'},          //7
+      {name: 'Family'},         //8
+      {name: 'Fantasy'},        //9
+      {name: 'Holiday'},        //10
+      {name: 'Horror'},         //11
+      {name: 'Martial Arts'},   //12
+      {name: 'Musical'},        //13
+      {name: 'Mystery'},        //14
+      {name: 'Romance'},        //15
+      {name: 'Sci-Fi'},         //16
+      {name: 'Sports'},         //17
+      {name: 'Suspense'},       //18
+      {name: 'Thriller'},       //19
+      {name: 'War'},            //20
+      {name: 'Western'},        //21
+  ];
+          
+  return knex(tblName)
+              .del()                                        //Remove all rows from table
+              .then(function()
+              {
+                  return knex.insert(rows).into(tblName);   //Insert new rows
+              });
+};
+```
+
+**person**
+
+```
+exports.seed = function(knex, Promise)
+{
+  var tblName = 'person';
+  var rows =
+  [ 
+      { name: "Michael Bay",       firstname:"Michael",     lastname:"Bay"},       //1
+      { name: "Sean Connery",      firstname:"Sean",        lastname:"Connery"},   //2
+      { name: "Nicolas Cage",      firstname:"Nicolas",     lastname:"Cage"},      //3
+      { name: "Ed Harris",         firstname:"Ed",          lastname:"Harris"},    //4
+      { name: "Shawn Levy",        firstname:"Shawn",       lastname:"Levy"},      //5
+      { name: "John Avildsen",     firstname:"John",        lastname:"Avildsen"},  //6
+      { name: "Ben Stiller",       firstname:"Ben",         lastname:"Stiller"},   //7
+      { name: "Carla Gugino",      firstname:"Carla",       lastname:"Gugino"},    //8
+      { name: "Ricky Gervais",     firstname:"Ricky",       lastname:"Gervais"},   //9
+      { name: "Robin Williams",    firstname:"Robin",       lastname:"Williams"},  //10
+      { name: "Dick Van Dyke",     firstname:"Dick",        lastname:"Van Dyke"},  //11
+      { name: "Owen Wilson",       firstname:"Owen",        lastname:"Wilson"},    //12
+      { name: "Christopher Nolan", firstname:"Christopher", lastname:"Nolan"},     //13
+      { name: "Christian Bale",    firstname:"Christian",   lastname:"Bale"},      //14
+      { name: "Michael Caine",     firstname:"Michael",     lastname:"Caine"},     //15
+      { name: "Ken Watanabe",      firstname:"Ken",         lastname:"Watanabe"},  //16
+      { name: "Kevin Reynolds",    firstname:"Kevin",       lastname:"Reynolds"},  //17
+      { name: "Jim Caviezel",      firstname:"Jim",         lastname:"Caviezel"},  //18     
+      { name: "Guy Pearce",        firstname:"Guy",         lastname:"Pearce"},    //19     
+      { name: "Richard Harris",    firstname:"Richard",     lastname:"Harris"},    //20     
+      { name: "Dagmara Dominczyk", firstname:"Dagmara",     lastname:"Dominczyk"}, //21    
+      { name: "Luis Guzm�n",       firstname:"Luis",        lastname:"Guzm�n"},    //22     
+      { name: "Michael Wincott",   firstname:"Michael",     lastname:"Wincott"},   //23     
+      { name: "George Cosmatos",   firstname:"George",      lastname:"Cosmatos"},  //24
+      { name: "Kurt Russell",      firstname:"Kurt",        lastname:"Russell"},   //25
+      { name: "Val Kilmer",        firstname:"Val",         lastname:"Kilmer"},    //26 
+      { name: "Sam Elliott",       firstname:"Sam",         lastname:"Elliott"},   //27 
+      { name: "Terry O''Quinn",    firstname:"Terry",       lastname:"O''Quinn"},  //28 
+      { name: "Andrew Davis",      firstname:"Andrew",      lastname:"Davis"},     //29
+      { name: "Kevin Costner",     firstname:"Kevin",       lastname:"Costner"},   //30
+      { name: "Ashton Kutcher",    firstname:"Ashton",      lastname:"Kutcher"},   //31
+      { name: "Sela Ward",         firstname:"Sela",        lastname:"Ward"},      //32
+      { name: "John McTiernan",    firstname:"John",        lastname:"McTiernan"}, //33
+      { name: "Alec Baldwin",      firstname:"Alec",        lastname:"Baldwin"},   //34
+      { name: "Scott Glenn",       firstname:"Scott",       lastname:"Glenn"},     //35
+      { name: "Sam Neill",         firstname:"Sam",         lastname:"Neill"},     //36
+      { name: "James Earl Jones",  firstname:"James",       lastname:"Jones"},     //37
+      { name: "Carlos Saloio",     firstname:"Carlos",      lastname:"Saloio"},    //38
+      { name: "Ralph Macchio",     firstname:"Ralph",       lastname:"Macchio"},   //39
+      { name: "Pat Morita",        firstname:"Pat",         lastname:"Morita"},    //40
+      { name: "Elisabeth Shue",    firstname:"Elisabeth",   lastname:"Shue"},      //41
+  ];                                                                                   
+                                                                                        
+
+  return knex(tblName)                                                                 
+              .del()                                        //Remove all rows from table
+              .then(function()                                                          
+              {
+                  return knex.insert(rows).into(tblName);   //Insert new rows
+              });
+};
+```
+
+**movie**
+
+```
+exports.seed = function(knex, Promise)
+{
+  var tblName = 'movie';
+  
+  var rows =
+  [
+    { rating_id: 4, director_id: 1,  title: "The Rock",                  releaseyr: 1996, score: 90, runtime: 136, overview: "A mild-mannered chemist and an ex-con must lead the counterstrike when a rogue group of military men, led by a renegade general, threaten a nerve gas attack from Alcatraz against San Francisco." },
+    { rating_id: 2, director_id: 5,  title: "Night at the Museum",       releaseyr: 2006, score: 90, runtime: 110, overview: "A newly recruited night security guard at the Museum of Natural History discovers that an ancient curse causes the animals and exhibits on display to come to life and wreak havoc." },
+    { rating_id: 2, director_id: 6,  title: "The Karate Kid",            releaseyr: 1984, score: 95, runtime: 127, overview: "A handyman/martial arts master agrees to teach a bullied boy karate and shows him that there is more to the martial art than fighting." },
+    { rating_id: 3, director_id: 13, title: "Batman Begins",             releaseyr: 2005, score: 95, runtime: 140, overview: "After training with his mentor, Batman begins his war on crime to free the crime-ridden Gotham City from corruption that the Scarecrow and the League of Shadows have cast upon it." },
+    { rating_id: 3, director_id: 17, title: "The Count of Monte Cristo", releaseyr: 2002, score: 95, runtime: 131, overview: "A young man, falsely imprisoned by his jealous \"friend,\" escapes and uses a hidden treasure to exact his revenge." },
+    { rating_id: 4, director_id: 24, title: "Tombstone",                 releaseyr: 1993, score: 95, runtime: 130, overview: "A successful lawman''s plans to retire anonymously in Tombstone, Arizona, are disrupted by the kind of outlaws he was famous for eliminating." },
+    { rating_id: 3, director_id: 29, title: "The Guardian",              releaseyr: 2006, score: 90, runtime: 139, overview: "A high school swim champion with a troubled past enrolls in the U.S. Coast Guard''s \"A\" School, where legendary rescue swimmer Ben Randall teaches him some hard lessons about loss, love, and self-sacrifice." },
+    { rating_id: 2, director_id: 33, title: "The Hunt for Red October",  releaseyr: 1990, score: 95, runtime: 135, overview: "In 1984, the USSR''s best submarine captain in their newest sub violates orders and heads for the USA. Is he trying to defect, or to start a war?" },
+  ];
+      
+        
+  return knex(tblName)
+              .del()                                        //Remove all rows from table
+              .then(function()
+              {
+                  return knex.insert(rows).into(tblName);   //Insert new rows
+              });
+};
+```
+
+**actor\_movie**
+
+```
+exports.seed = function(knex, Promise)
+{
+  var tblName = 'actor_movie';
+  
+  var rows =
+  [
+      //The Rock
+      { movie_id: 1, person_id: 2},    //Sean Connery
+      { movie_id: 1, person_id: 3},    //Nicolas Cage
+      { movie_id: 1, person_id: 4 },   //Ed Harris
+    
+      //Night at the Museum
+      { movie_id: 2, person_id: 7},    //Ben Stiller
+      { movie_id: 2, person_id: 8},    //Carla Gugino
+      { movie_id: 2, person_id: 9},    //Ricky Gervais
+      { movie_id: 2, person_id: 10},   //Robin Williams
+      { movie_id: 2, person_id: 11},   //Dick Van Dyke
+      { movie_id: 2, person_id: 12 },  //Owen Wilson
+    
+      //The Karate Kid
+      { movie_id: 3, person_id: 39},   //Ralph Macchio
+      { movie_id: 3, person_id: 40},   //Pat Morita
+      { movie_id: 3, person_id: 41 },  //Elisabeth Shue
+    
+      //Batman Begins
+      { movie_id: 4, person_id: 14},   //Christian Bale
+      { movie_id: 4, person_id: 15},   //Michael Caine
+      { movie_id: 4, person_id: 16 },  //Ken Watanabe
+    
+      //The Count of Monte Cristo
+      { movie_id: 5, person_id: 18},   //Jim Caviezel
+      { movie_id: 5, person_id: 19},   //Guy Pearce
+      { movie_id: 5, person_id: 20},   //Richard Harris
+      { movie_id: 5, person_id: 21},   //Dagmara Dominczyk
+      { movie_id: 5, person_id: 22},   //Luis Guzm�n
+      { movie_id: 5, person_id: 23 },  //Michael Wincott
+    
+      //Tombstone
+      { movie_id: 6, person_id: 25},   //Kurt Russell
+      { movie_id: 6, person_id: 26},   //Val Kilmer
+      { movie_id: 6, person_id: 27},   //Sam Elliott
+      { movie_id: 6, person_id: 28 },  //Terry O'Quinn
+    
+      //The Guardian
+      { movie_id: 7, person_id: 30},   //Kevin Costner
+      { movie_id: 7, person_id: 31},   //Ashton Kutcher
+      { movie_id: 7, person_id: 32 },  //Sela Ward
+    
+      //The Hunt for Red October
+      { movie_id: 8, person_id: 2},    //Sean Connery
+      { movie_id: 8, person_id: 34},   //Alec Baldwin
+      { movie_id: 8, person_id: 35},   //Scott Glenn
+      { movie_id: 8, person_id: 36},   //Sam Neill
+      { movie_id: 8, person_id: 37},   //James Earl Jones
+  ];
+      
+      
+  return knex(tblName)
+              .del()                                        //Remove all rows from table
+              .then(function()
+              {
+                  return knex.insert(rows).into(tblName);   //Insert new rows
+              });
+};
+```
+
+**tag\_movie**
+
+```
+exports.seed = function(knex, Promise)
+{
+  var tblName = 'tag_movie';
+  
+  var rows =
+  [
+      //The Rock
+      { movie_id: 1, tag_id: 2},    //Action
+      
+      //Night at the Museum
+      { movie_id: 2, tag_id: 2},    //Action
+      { movie_id: 2, tag_id: 4},    //Comedy
+      
+      //The Karate Kid
+      { movie_id: 3, tag_id: 7 },   //Martial Arts
+  
+      //Batman Begins
+      { movie_id: 4, tag_id: 2 },   //Action
+      
+      //The Count of Monte Cristo
+      { movie_id: 5, tag_id: 7 },   //Drama
+  
+      //Tombstone
+      { movie_id: 6, tag_id: 21 },  //Western
+  
+      //The Guardian
+      { movie_id: 7, tag_id: 7},    //Drama
+      
+      //The Hunt for Red October
+      { movie_id: 8, tag_id: 7},    //Drama
+  ];
+      
+      
+  return knex(tblName)
+              .del()                                        //Remove all rows from table
+              .then(function()
+              {
+                  return knex.insert(rows).into(tblName);   //Insert new rows
+              });
+};
+```
+
+now run the seed using the command `knex seed:run`. It will generate the dummy data we require for our application.
+
+
+kamal@konfinity.com
+
+Some of the content have been taken from various sources. Due to limitation of resources we cannot give due accrediation to the respective authors. From next versions we will try to include the sources. 
